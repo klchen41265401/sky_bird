@@ -259,7 +259,7 @@ function init() {
   // SkyCloudMesh
   skyMesh = new SkyCloudMesh({
     ...params,
-    perlinTextureUrl: '/perlin256.png'
+    perlinTextureUrl: `${import.meta.env.BASE_URL}perlin256.png`
   })
   scene.value.add(skyMesh)
 }

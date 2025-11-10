@@ -543,7 +543,7 @@ function initBirds() {
   const loader = new GLTFLoader()
   
   loader.load(
-    '/Flamingo.glb',
+    `${import.meta.env.BASE_URL}Flamingo.glb`,
     (gltf) => {
       console.log('✅ 紅鶴模型載入成功！')
       console.log('- 模型結構:', gltf.scene)

@@ -1,0 +1,22 @@
+{
+  "name": "vue-threejs-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Vue 3 + Three.js Demo - 3D Cloud & Birds Prototype",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "lil-gui": "^0.21.0",
+    "three": "^0.181.0",
+    "vue": "^3.3.4"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^4.3.4",
+    "sass": "^1.93.3",
+    "terser": "^5.44.1",
+    "vite": "^4.4.9"
+  }
+}

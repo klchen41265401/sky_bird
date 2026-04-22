@@ -303,9 +303,10 @@ function animate() {
 <style scoped>
 .sky-container {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
   background: #87CEEB; /* Sky blue background - matches Three.js scene */
 }
 
@@ -387,26 +388,20 @@ function animate() {
   position: relative;
   z-index: 10;
   max-width: 900px;
+  width: min(100%, 900px);
   margin: 0 auto;
   padding: 150px 20px 60px;
 }
 
 h1 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: clamp(1.45rem, 3.2vw, 2.5rem);
   color: #2c3e50;
   margin-bottom: 50px;
   text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.8);
   font-weight: bold;
   line-height: 1.2;
   word-break: break-word;
-}
-
-h2 {
-  font-size: 1.5rem;
-  color: #34495e;
-  margin-bottom: 20px;
-  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.6);
 }
 
 h2 {
@@ -440,6 +435,7 @@ h2 {
   background: rgba(255, 255, 255, 0.3);
   border-radius: 8px;
   padding: 20px;
+  min-height: 160px;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -460,11 +456,14 @@ h2 {
 .access-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 32px;
+  min-height: 46px;
   background: linear-gradient(90deg, #399DFF 0%, #6BC5FF 20%, #9CECFF 40%, #CDF5FF 69%, #E6FAFF 89%, #FFFFFF 100%);
   color: #2c3e50;
   text-decoration: none;
+  text-align: center;
   border-radius: 25px;
   font-weight: 600;
   font-size: 1.1rem;
@@ -659,8 +658,10 @@ a svg {
 .download-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 32px;
+  min-height: 46px;
   background: linear-gradient(270deg, #FFFF90 14%, #C1EBC7 35%, #A2E2E3 49%, #93DDF1 63%, #3391FF 100%);
   color: #2c3e50;
   text-decoration: none;
@@ -681,8 +682,10 @@ a svg {
 .history-button {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
   padding: 12px 28px;
+  min-height: 46px;
   background: linear-gradient(90deg, #399DFF 0%, #6BC5FF 20%, #9CECFF 40%, #CDF5FF 69%, #E6FAFF 89%, #FFFFFF 100%);
   color: #2c3e50;
   text-decoration: none;
@@ -724,6 +727,7 @@ a svg {
   background: white;
   border-radius: 16px;
   width: 90%;
+  width: min(96vw, 700px);
   max-width: 700px;
   max-height: 80vh;
   display: flex;
@@ -775,6 +779,7 @@ a svg {
 .modal-body {
   padding: 20px 30px;
   overflow-y: auto;
+  overscroll-behavior: contain;
 }
 
 .modal-body table {
@@ -801,13 +806,13 @@ a svg {
 }
 
 .modal-body thead th:first-child {
-  width: 60%;
+  width: 34%;
   padding-left: 30px;
 }
 
 .modal-body thead th:last-child {
-  text-align: center;
-  width: 40%;
+  text-align: left;
+  width: 66%;
 }
 
 .modal-body tbody tr {
@@ -835,7 +840,7 @@ a svg {
 }
 
 .modal-body tbody td:last-child {
-  text-align: center;
+  text-align: left;
 }
 
 .modal-body tbody tr:last-child td {
@@ -901,12 +906,13 @@ a svg {
   }
   
   .link-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 12px;
   }
   
   .link-card {
     padding: 12px;
+    min-height: 140px;
   }
   
   .link-card h3 {
@@ -961,11 +967,13 @@ a svg {
   }
   
   .modal-body {
-    padding: 15px 20px;
+    padding: 15px;
+    overflow-x: auto;
   }
   
   .modal-body table {
     font-size: 0.85rem;
+    min-width: 500px;
   }
   
   .modal-body thead th,
@@ -986,6 +994,53 @@ a svg {
   .modal-body a svg {
     width: 14px;
     height: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .download-section {
+    padding: 105px 12px 34px;
+  }
+
+  .link-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .access-button,
+  .download-button,
+  .history-button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 360px) {
+  .download-section {
+    padding: 82px 8px 24px;
+  }
+
+  h1 {
+    margin-top: 30px;
+    margin-bottom: 14px;
+  }
+
+  .internal-link-section,
+  .apk-section {
+    padding: 12px 8px;
+    border-radius: 10px;
+  }
+
+  .link-card {
+    min-height: 0;
+    padding: 12px 10px;
+  }
+
+  .modal-content {
+    width: 99%;
+    border-radius: 10px;
+  }
+
+  .modal-body table {
+    min-width: 420px;
   }
 }
 
@@ -1018,6 +1073,17 @@ a svg {
   }
 }
 
+@media (min-width: 1025px) and (max-width: 1439px) {
+  .download-section {
+    max-width: 1120px;
+    padding: 140px 28px 56px;
+  }
+
+  .link-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
 /* Small mobile */
 @media (max-width: 480px) {
   .brand-logo {
@@ -1027,7 +1093,7 @@ a svg {
   }
   
   .brand-logo img {
-    height: 90px;
+    height: 60px;
   }
   
   h1 {
@@ -1038,38 +1104,38 @@ a svg {
   }
   
   h2 {
-    font-size: 1.05rem;
-    margin-bottom: 12px;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
   }
   
   .download-section {
-    padding: 115px 10px 30px;
+    padding: 90px 10px 30px;
   }
   
   .internal-link-section,
   .apk-section {
-    padding: 15px 10px;
+    padding: 15px 12px;
     margin-bottom: 20px;
   }
   
   .link-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
   
   .link-card {
-    padding: 10px;
+    padding: 15px 12px;
   }
   
   .link-card h3 {
-    font-size: 0.9rem;
-    margin-bottom: 8px;
+    font-size: 1rem;
+    margin-bottom: 10px;
   }
   
   .access-button {
-    padding: 8px 12px;
-    font-size: 0.8rem;
-    white-space: nowrap;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+    white-space: normal;
   }
   
   .access-button svg {
@@ -1096,11 +1162,13 @@ a svg {
   }
   
   .modal-body {
-    padding: 12px 15px;
+    padding: 12px;
+    overflow-x: auto;
   }
   
   .modal-body table {
     font-size: 0.8rem;
+    min-width: 450px;
   }
   
   .modal-body thead th,
@@ -1122,6 +1190,27 @@ a svg {
   
   .link-grid {
     grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (hover: none) {
+  .link-card:hover,
+  .access-button:hover,
+  .download-button:hover,
+  .history-button:hover,
+  .modal-body a:hover {
+    transform: none;
+    box-shadow: inherit;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
   }
 }
 
